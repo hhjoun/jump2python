@@ -1,2 +1,4 @@
 # jump2python
-Exercise Python
+
+Exercise Python.
+Create the repository for seemless practice at home and work place.
