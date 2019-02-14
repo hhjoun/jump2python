@@ -44,10 +44,10 @@ print("life", "is", "too", "short")
 print("life","is","too","short")
 
 for i in range(10):
-    print(i, end='')
+    print (i, end='')
 print('')
 for i in range(10):
-    print(i, end=' ')
+    print (i, end=' ')
 '''
 #-----------------------
 # Exercise file I/O #1
@@ -67,10 +67,140 @@ while True:
 #-----------------------
 # Exercise file I/O #2
 #-----------------------
+'''
+f = open("./sample.txt", 'w')
+f.write('70\n')
+f.write('60\n')
+f.write('55\n')
+f.write('75\n')
+f.write('95\n')
+f.write('90\n')
+f.write('80\n')
+f.write('80\n')
+f.write('85\n')
+f.write('100')
+f.close();
 
+sum = 0
+f = open("sample.txt", 'r')
+sample = f.readlines()
+f.close()
+
+for score in sample:
+    sum += int(score)
+
+avg = sum / len(sample)
+print("average is %.2f, number of students is %d" % (avg, len(sample)))
+
+f = open("result.txt", 'w')
+f.write("average is %.2f. Number of students is %d" % (avg, len(sample)))
+f.close();
+'''
+#-----------------------
+# Exercise Input arguments using sys module
+#-----------------------
+'''
+import sys
+
+args = sys.argv[1:]
+for i in args:
+    print(i.upper(), end=' ')
+'''
+#-----------------------
+# Exercise class
+#-----------------------
+'''
+class FourCal:
+    def setdata(self, first, second):
+        self.a = first
+        self.b = second
+
+    def sum(self):
+        return self.a + self.b
+
+cal = FourCal()
+cal.setdata(3, 4)
+print("sum is %d" % cal.sum())
+
+class HousePark:
+    lastname = "Park"
+    def __init__(self, firstname):
+        self.fullname = self.lastname + ' ' + firstname
+
+    def travel(self, where):
+        print("%s travelled %s" % (self.fullname, where))
+
+    def love(self, partner):
+        print("%s fell in love with %s" % (self.fullname, partner.fullname))
+
+    def fight(self, partner):
+        print("%s fought with %s " % (self.fullname, partner.fullname))
+
+    def __add__(self, partner):
+        print("%s and %s got married" % (self.fullname, partner.fullname))
+
+    def __sub__(self, partner):
+        print("%s and %s divorced" % (self.fullname, partner.fullname))
+
+
+class HouseKim(HousePark):
+    lastname = "Kim"
+    def travel(self, where, day):
+        print("%s\ travelled %s during %d" % (self.fullname, where, day))
+
+pey = HousePark("EeungYong")
+juliet = HouseKim("Juliet")
+pey.travel("USA")
+juliet.travel("USA", 10)
+pey.love(juliet)
+juliet.love(pey)
+pey + juliet
+pey.fight(juliet)
+pey - juliet
+'''
 
 #-----------------------
-# Exercise Input argument using sys module
+# Exercise thread
 #-----------------------
+'''
+import threading
+import time
 
+def say(msg):
+    while True:
+        time.sleep(1)
+        print(msg)
 
+for msg in ['you', 'need', 'python']:
+    t = threading.Thread(target=say, args=(msg,))
+    t.daemon = True
+    t.start()
+
+for i in range(100):
+    time.sleep(0.1)
+    print(i)
+'''
+#-----------------------
+# Exercise thread class
+#-----------------------
+import threading
+import time
+
+class MyThread(threading.Thread):
+    def __init__(self, msg):
+        threading.Thread.__init__(self)
+        self.msg = msg
+        self.daemon = True
+
+    def run(self):
+        while True:
+            time.sleep(1)
+            print(self.msg)
+
+for msg in ['you', 'need', 'python']:
+    f = MyThread(msg)
+    f.start()
+
+for i in range(100):
+    time.sleep(0.1)
+    print(i)
