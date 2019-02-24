@@ -183,6 +183,7 @@ for i in range(100):
 #-----------------------
 # Exercise thread class
 #-----------------------
+'''
 import threading
 import time
 
@@ -204,3 +205,51 @@ for msg in ['you', 'need', 'python']:
 for i in range(100):
     time.sleep(0.1)
     print(i)
+'''
+
+#-----------------------
+# Regular expression
+#-----------------------
+import re
+
+#1
+p = re.compile("a[.]{3,}b")
+ex1 = 'acccb'
+ex2 = 'a....b'
+ex3 = 'aaab'
+ex4 = 'a.cccb'
+m = p.search(ex1)
+print(m)
+m = p.search(ex2)
+print(m)
+m = p.search(ex3)
+print(m)
+m = p.search(ex4)
+print(m)
+
+#2
+p = re.compile("[a-z]+")
+m = p.search("5 python")
+print("start %d end %d sum %d" % (m.start(), m.end(), m.start() + m.end()))
+
+#3
+phone = """
+This is phone address
+park 010-9999-9988
+kim 010-9909-7789
+lee 010-8789-7768
+Let's find it
+"""
+#p = re.compile("[a-zA-Z]\s+\d{3}[-]\d{4}[-](\d{4})", re.MULTILINE)
+p = re.compile("(^[a-zA-Z]+\s+\d+[-]\d+)[-](\d+)", re.MULTILINE)
+print(p.sub("\g<1>-****", phone))
+#print(m)
+#print(p.sub('****', m.group(1)))
+
+# Simple solution
+p = re.compile("(\d{3}[-]\d{4})[-]\d{4}")
+print(p.sub("\g<1>-****", phone))
+
+#4
+
+
